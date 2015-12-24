@@ -1,0 +1,46 @@
+package com.lidroid.xutils2.db.converter;
+
+import android.database.Cursor;
+import android.text.TextUtils;
+
+import com.lidroid.xutils.db.sqlite.ColumnDbType;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+/**
+ * Created by Ren Weiwei on 2015/12/24.
+ * Email: rww_2010@126.com
+ */
+public class JSONArrayColumnConverter implements ColumnConverter<JSONArray> {
+    @Override
+    public JSONArray getFieldValue(final Cursor cursor, int index) {
+        try {
+            return cursor.isNull(index) ? null : new JSONArray(cursor.getString(index));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public JSONArray getFieldValue(String fieldStringValue) {
+        if (TextUtils.isEmpty(fieldStringValue)) return null;
+        try {
+            return new JSONArray(fieldStringValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Object fieldValue2ColumnValue(JSONArray fieldValue) {
+        return fieldValue.toString();
+    }
+
+    @Override
+    public ColumnDbType getColumnDbType() {
+        return ColumnDbType.TEXT;
+    }
+}
