@@ -107,5 +107,9 @@ public class ColumnConverterFactory {
 
         StringColumnConverter stringColumnConverter = new StringColumnConverter();
         columnType_columnConverter_map.put(String.class.getName(), stringColumnConverter);
+        
+        //rww
+        JSONArrayColumnConverter jsonArrayColumnConverter = new JSONArrayColumnConverter();
+        columnType_columnConverter_map.put(JSONArray.class.getName(), jsonArrayColumnConverter);
     }
 }
